@@ -1,0 +1,71 @@
+﻿<@model ChatChat.Models.RegisterModel
+ 
+@{
+    ViewBag.Title = "Register";
+}
+   
+ 
+<style>
+    html {
+        background-color: #d3e2f5;
+    }
+
+    body {
+        background-color: #d3e2f5;
+    }
+    /* кнопка*/
+    .blubtn {
+        hight: auto;
+        width: auto;
+        text-align: center;
+        text-decoration: none;
+        font: bold 15px arial;
+        border: #1071FF 1px solid;
+        color: #5D8EC7;
+        padding: 3px;
+        padding-left: 5px;
+        padding-right: 5px;
+        margin: 20px auto;
+        transition: .5s;
+        border-radius: 0px;
+        position: relative;
+    }
+
+        .blubtn:hover {
+            top: 5px;
+            transition: .5s;
+            color: #0dd304;
+            border: #0dd304 1px solid;
+            border-radius: 10px;
+        }
+
+        .blubtn:active {
+            color: #000;
+            border: #5D8EC7 1px solid;
+            transition: .07s;
+            background-color: #FFF;
+        }
+</style>
+ 
+ 
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+<div class="row">
+    <div class="col-md-4 col-md-push-4" style="width: auto; height: auto;">
+        <h4><label>Регистрация</label></h4>
+        <hr />
+        @Html.ValidationSummary(false)
+
+         <p><label>Электронный адрес:</label><br /></p>
+         <p>@Html.EditorFor(model => model.Email)</p>
+         <p><label>Пароль:</label><br /></p>
+         <p>@Html.EditorFor(model => model.Password)</p>
+         <p><label>Подтвердите пароль:</label><br /></p>
+         <p>@Html.EditorFor(model => model.PasswordConfirm)</p>
+         <p><button class="blubtn">Зарегистрироваться</button></p>
+           
+    </div>
+</div>
+    
+}

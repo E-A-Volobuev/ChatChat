@@ -1,0 +1,887 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Блочная верстка в HTML5</title>
+    <style>
+        html {
+            background-color: #d3e2f5;
+        }
+
+        body {
+            background-color: #d3e2f5;
+        }
+        /*  /////заблокировать*/
+        /*кнопка добавления в беседу*/
+        a.bot1 {
+            background: #c4eef1;
+            border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) #1a8bea;
+            border-radius: 4px;
+            border-style: solid;
+            border-width: 1px;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+            color: #333333;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            width: 120px;
+            line-height: 20px;
+            margin: 20px;
+            padding: 4px 12px;
+            text-align: center;
+            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+            vertical-align: middle;
+            position: relative;
+            -webkit-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+            -webkit-transition-property: -webkit-transform;
+            transition-property: transform;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            transform: translateZ(0);
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+        }
+
+            a.bot1:before {
+                pointer-events: none;
+                position: absolute;
+                z-index: -1;
+                content: '';
+                top: 100%;
+                left: 5%;
+                height: 10px;
+                width: 90%;
+                opacity: 0;
+                background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+                background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+                -webkit-transition-duration: 0.3s;
+                transition-duration: 0.3s;
+                -webkit-transition-property: -webkit-transform, opacity;
+                transition-property: transform, opacity;
+            }
+
+            a.bot1:hover {
+                -webkit-transform: translateY(-5px);
+                -ms-transform: translateY(-5px);
+                transform: translateY(-5px);
+            }
+
+                a.bot1:hover:before {
+                    opacity: 1;
+                    -webkit-transform: translateY(5px);
+                    -ms-transform: translateY(5px);
+                    transform: translateY(5px);
+                }
+        /*кнопка написать*/
+        .write {
+            height: 30px;
+            overflow: hidden;
+            width: 110%;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font: bold 15px arial;
+        }
+
+        a.writeNow {
+            margin: 0 auto;
+            display: block;
+            line-height: 50px;
+            height: 50px;
+            width: 100%;
+            overflow: hidden;
+            text-align: center;
+            text-decoration: none;
+            font-family: bold;
+            text-shadow: 0 100px 0 #FFF,1px 76px 10px #000;
+            color: #FFF;
+            background: #5D8EC7;
+            border-right: 2px solid #FFF;
+            border-left: 2px solid #FFF;
+            -webkit-transition: all 0.3s ease-in-out;
+            -moz-transition: all 0.3s ease-in-out;
+            -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+            a.writeNow:hover {
+                text-shadow: 0 50px 0 #FFF, 1px 51px 20px #FFF;
+                margin-top: -50px;
+                height: 100px;
+                background: #20d419;
+            }
+
+
+        /* кнопка пожаловаться */
+        a.blubtn {
+            hight: 20px;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            font: bold 15px arial;
+            border: #1071FF 1px solid;
+            color: #5D8EC7;
+            padding: 3px;
+            padding-left: 5px;
+            padding-right: 5px;
+            margin: 20px auto;
+            transition: .5s;
+            border-radius: 0px;
+            position: relative;
+        }
+
+            a.blubtn:hover {
+                top: 5px;
+                transition: .5s;
+                color: #eb0e0e;
+                border: #eb0e0e 1px solid;
+                border-radius: 10px;
+            }
+
+            a.blubtn:active {
+                color: #000;
+                border: #5D8EC7 1px solid;
+                transition: .07s;
+                background-color: #FFF;
+            }
+        /*кнопка покинуть чат*/
+        a.glo {
+            color: #5D8EC7;
+            padding: 0px 10px;
+            width: 120px;
+            text-decoration: none;
+            text-align: center;
+            margin: 0 auto;
+            display: block;
+            background-image: linear-gradient(to left,transparent,transparent 50%,#eb0e0e 50%,#eb0e0e);
+            background-position: 100% 0;
+            background-size: 200% 100%;
+            transition: all .25s ease-in;
+            font: bold 15px arial;
+            border: 1px solid #5D8EC7;
+        }
+
+
+            a.glo:hover {
+                background-position: 0 0;
+                color: #fff;
+            }
+
+        /* админ панель*/
+        a.fciA {
+            margin: 30px auto;
+            font-family: arial;
+            font-size: 20px;
+            line-height: 20px;
+            letter-spacing: -1px;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+            width: auto;
+            color: #888888;
+            position: relative;
+            -webkit-transition: color 0.2s;
+            -moz-transition: color 0.2s;
+            -o-transition: color 0.2s;
+            transition: color 0.2s;
+        }
+
+            a.fciA:hover {
+                color: #444444;
+                background: rgba(0,0,0,0.1);
+            }
+
+            a.fciA:after {
+                left: -20px;
+                -webkit-transition-property: left, opacity, top;
+                -moz-transition-property: left, opacity, top;
+                -o-transition-property: left, opacity, top;
+                transition-property: left, opacity, top;
+                -webkit-transition-duration: .2s, .2s, .2s;
+                -moz-transition-duration: .2s, .2s, .2s;
+                -o-transition-duration: .2s, .2s, .2s;
+                transition-duration: .2s, .2s, .2s;
+                content: "";
+                width: 12px;
+                height: 12px;
+                background: transparent;
+                position: absolute;
+                border-left: 5px solid #444444;
+                border-top: 5px solid #444444;
+                top: -22px;
+                opacity: 0;
+            }
+
+            a.fciA:hover:after {
+                left: -10px;
+                top: -12px;
+                opacity: 1;
+            }
+
+            a.fciA:before {
+                right: -20px;
+                -webkit-transition-property: right, opacity, top;
+                -moz-transition-property: right, opacity, top;
+                -o-transition-property: right, opacity, top;
+                transition-property: right, opacity, top;
+                -webkit-transition-duration: .2s, .2s, .2s;
+                -moz-transition-duration: .2s, .2s, .2s;
+                -o-transition-duration: .2s, .2s, .2s;
+                transition-duration: .2s, .2s, .2s;
+                content: "";
+                width: 12px;
+                height: 12px;
+                background: transparent;
+                position: absolute;
+                border-right: 5px solid #444444;
+                border-top: 5px solid #444444;
+                top: -22px;
+                opacity: 0;
+            }
+
+            a.fciA:hover:before {
+                right: -10px;
+                top: -12px;
+                opacity: 1;
+            }
+
+        .fciSpan:after {
+            left: -20px;
+            -webkit-transition-property: left, opacity, bottom;
+            -moz-transition-property: left, opacity, bottom;
+            -o-transition-property: left, opacity, bottom;
+            transition-property: left, opacity, bottom;
+            -webkit-transition-duration: .2s, .2s, .2s;
+            -moz-transition-duration: .2s, .2s, .2s;
+            -o-transition-duration: .2s, .2s, .2s;
+            transition-duration: .2s, .2s, .2s;
+            content: "";
+            width: 12px;
+            height: 12px;
+            background: transparent;
+            position: absolute;
+            border-left: 5px solid #444444;
+            border-bottom: 5px solid #444444;
+            bottom: -24px;
+            opacity: 0;
+        }
+
+        .fciSpan:hover:after {
+            left: -10px;
+            bottom: -14px;
+            opacity: 1;
+        }
+
+        .fciSpan:before {
+            right: -20px;
+            -webkit-transition-property: right, opacity, bottom;
+            -moz-transition-property: right, opacity, bottom;
+            -o-transition-property: right, opacity, bottom;
+            transition-property: right, opacity, bottom;
+            -webkit-transition-duration: .2s, .2s, .2s;
+            -moz-transition-duration: .2s, .2s, .2s;
+            -o-transition-duration: .2s, .2s, .2s;
+            transition-duration: .2s, .2s, .2s;
+            content: "";
+            width: 12px;
+            height: 12px;
+            background: transparent;
+            position: absolute;
+            border-right: 5px solid #444444;
+            border-bottom: 5px solid #444444;
+            bottom: -24px;
+            opacity: 0;
+        }
+
+        .fciSpan:hover:before {
+            right: -10px;
+            bottom: -14px;
+            opacity: 1;
+        }
+        /*////заблокировать*/
+        a.green {
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.08);
+            -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.08);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.08);
+            color: black;
+            display: block;
+            width: 130px;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            padding: 8px 16px;
+            margin: 20px auto;
+            text-decoration: none;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+            -webkit-transition: background-color 0.1s linear;
+            -moz-transition: background-color 0.1s linear;
+            -o-transition: background-color 0.1s linear;
+            transition: background-color 0.1s linear;
+        }
+
+        a.green {
+            background-color: #c4eef1;
+            border: 1px solid #75eaf2;
+        }
+
+            a.green:hover {
+                background-color: #f51811;
+            }
+
+
+        /*межстрочный интервал таблицы*/
+        table {
+            width: 100%;
+        }
+
+        td {
+            padding: 10px;
+            font-family: Arial;
+        }
+
+        /*шрифты*/
+        .under {
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        .arial {
+            font-family: Arial;
+        }
+    </style>
+</head>
+<body>
+    <div class="row">
+        @**админ панель*@
+        <div id="Admin" class="col-md-4 col-md-pull-1" style="width: auto; height: auto;">
+            <a id="ban" href="#" class="fciA navItem"><span class="fciSpan">Админ</span></a>
+        </div>
+        @**список пользователей*@
+        <div id="tableBlock" class="col-md-4" style="height: auto; width: 500px;">
+            Пользователи
+        </div>
+        @*//сообщения*@
+        <div id="writeBlock" class="col-md-4" style="margin-top:10px;">
+            <p>Кому:</p>
+            <p><input id="userName" /></p>
+            <p><input hidden id="userId" /></p>
+            <p><b>Новое сообщение:</b></p>
+            <p><input type="text" id="Text" /></p>
+            <button id="Message">Отправить</button>
+            <button id="File">Прикрепить</button>
+        </div>
+        @*добавление файла к письму*@
+        <div class="col-md-4" id="files" style="width: auto; height: auto;">
+            <h4>Файл изображения</h4>
+            <input type="file" name="uploadImage" id="uploadFile" />
+            <p>
+                <button id="addFile">Прикрепить файл</button>
+            </p>
+        </div>
+        @*история сообщений*@
+        <div id="dialogBlock" class="col-md-4 col-md-push-1" style="width: 300px; height: auto;"></div>
+        @*сообщения в беседу*@
+        <div id="writeChatBlock" class="col-md-4 col-md-push-1" style="width: auto; height: auto;">
+            <p><input hidden id="chatId" /></p>
+            <p>Кому:</p>
+            <p><input id="MessageFrom" /></p>
+            <p><b>Новое сообщение:</b></p>
+            <p><input type="text" id="TextChat" /></p>
+            <button id="MessageChat">Отправить</button>
+            <button id="FileChat">Прикрепить</button>
+        </div>
+    </div>
+    <div class="row">
+        @*//оформление блокировки*@
+        <div id="banUserBlock"  class="col-md-4 col-md-pull-1" style="width: auto;
+            height: auto;"></div>
+        @*список бесед*@
+        <div id="chatUserBlock" class="col-md-4" style="height: auto; width: 500px; margin-top: 50px;">Беседы</div>
+        @*//жалоба*@
+        <div id="complaintBlock" class="col-md-4" style="width: auto; height: auto;">
+            <p><b>Причина для блокировки пользователя:</b></p>
+            <p><input hidden id="compId" /></p>
+            <p><input type="text" id="CompText" /></p>
+            <button id="complaint">Пожаловаться</button>
+        </div>
+    </div>
+    <div class="row">
+        @*кнопка создания беседы*@
+        <div id="room" class="col-md-4"><a id="Chat" href="#" class="bot1" tabindex="0">Создать беседу</a></div>
+        @*добавление в беседу*@
+        <div id="selectUserBlock" class="col-md-4"></div>
+    </div>
+
+      
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+
+</body>
+</html>
+
+
+    @section scripts
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                //$("#Admin").css('display', 'none');
+                $("#Test").css('display', 'none');
+                $("#complaintBlock").css('display', 'none');
+                $("#files").css('display', 'none');
+                $("#part").css('display', 'none');
+                GetAllUser();
+                ChatName();
+
+                $("#Message").click(function (event) {
+                    event.preventDefault();
+                    Message();
+                });
+                $("#Chat").click(function (event) {
+                    event.preventDefault();
+                    Chat();
+                });
+                $("#MessageChat").click(function (event) {
+                    event.preventDefault();
+                    Message();
+                });
+                $("#showRoom").click(function (event) {
+                    event.preventDefault();
+                    GetCurrentUserName();
+                });
+                $("#ban").click(function (event) {
+                    event.preventDefault();
+                    Admin();
+                });
+                $("#complaint").click(function (event) {
+                    event.preventDefault();
+                    Complaint();
+                });
+                $("#File").click(function (event) {
+                    event.preventDefault();
+                    FileAdd();
+                });
+                $("#FileChat").click(function (event) {
+                    event.preventDefault();
+                    FileAdd();
+                });
+                $("#addFile").click(function (event) {
+                    event.preventDefault();
+                    Broadcast();
+                });
+               
+            });
+
+            ////////////// Получение всех зарегистрированных пользователей по ajax-запросу///////////////////////////////////////////////////////////////////
+            function GetAllUser() {
+                $("#writeBlock").css('display', 'none');
+                $("#writeChatBlock").css('display', 'none');
+                $("#publicRoom").css('display', 'none');
+                $.ajax({
+                    url: '/api/chat/getpeople',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        WriteResponse(data);
+                    },
+                    error: function (x, y, z) {
+                        alert(x + '\n' + y + '\n' + z);
+                    }
+                });
+            }
+            //////админ панель
+            function Admin() {
+
+                $.ajax({
+                    url: "/api/admin/check",
+                    type: "GET",
+                    data: 'json',
+                    success: function (data) {
+                        if (typeof data === "string") {
+                            alert(data);
+                            BanList();
+                        }
+
+                    },
+                    error: function (data) {
+                        alert(data.response);
+                    }
+                });
+            }
+
+
+            // вывод полученных данных на экран
+            function WriteResponse(users) {
+                var strResult = "<table><h4 class='arial'>Пользователи:</h4>";
+                $.each(users, function (index, user) {
+                    strResult += "<tr><td class='under'>" + user.Email + "</td><td>" + "<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>" +
+                        "</td><td class='write'><a id='writeItem' href='#' class='writeNow' data-item='" + user.Id + "' onclick='MessageItem(this);'> Написать </a></td>" + "<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>" +
+                        "</td ><td><a id='editItem' href='#' class='blubtn' data-complaint='" + user.Id + "' onclick='ComplaintItem(this);'> Пожаловаться </a></td>";
+                });
+                strResult += "</tr></table>";
+                $("#tableBlock").html(strResult);
+            }
+            // обработчик события для отправки личного сообщения
+            function MessageItem(el) {
+                var id = $(el).attr('data-item');
+                GetUser(id);
+            }
+            // обработчик события для отправки жалобы
+            function ComplaintItem(el) {
+                var id = $(el).attr('data-complaint');
+                ShowComplaint(id);
+            }
+            /////форма отправки жалобы/////////
+            function ShowComplaint(id) {
+                $("#complaintBlock").css('display', 'block');
+                $("#compId").val(id);
+            }
+            ///////////////////////////////////////////////////////////////отправка жалобы//////////////////////////////////////////////
+            function Complaint() {
+
+                //получаем значения для отправки
+                var message = {
+                    Id: $("#compId").val(),
+                    Text: $('#CompText').val()
+                }
+                $.ajax({
+                    url: '/api/chat/complaint',
+                    type: 'POST',
+                    data: JSON.stringify(message),
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        alert(data);
+                    },
+                    error: function (data) {
+                        alert(data.responseText);
+                    }
+                });
+            }
+            ///////////////////////////////////////////////////////////////////////////////////////////// личные сообщения
+            //// Получение пользователя
+            function GetUser(id) {
+
+                $.ajax({
+                    url: "/api/chat/person/" + id,
+                    type: "GET",
+                    data: 'json',
+                    success: function (data) {
+                        ShowUser(data);
+                    },
+                    error: function (data) {
+                        alert(data.responseText);
+                    }
+                });
+            }
+            //вывод имени пользователя при отправке сообщения
+            function ShowUser(user) {
+                if (user != null) {
+                    $("#writeBlock").css('display', 'block');
+                    $("#userName").val(user.Email);
+                    $("#userId").val(user.Id);
+                }
+                else {
+                    alert("Пользователь не найден");
+                }
+            }
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////отправка личного сообщения
+            function Message() {
+                //получение текста сообщения
+                var messageText = "";
+                var a = $('#Text').val();
+                var b = $('#TextChat').val();
+
+                if (a === "") {
+                    messageText = b;
+                }
+                else if (b === "") {
+                    messageText = a;
+                }
+                else {
+                    alert("заполните только одну форму отправки сообщений!!!")
+                }
+                
+                //получаем значения для отправки
+                var message = {
+                    ToId: $('#userId').val(),
+                    Text: messageText,
+                    ChatId: $('#chatId').val(),
+                }
+                $.ajax({
+                    url: '/api/chat/messages',
+                    type: 'POST',
+                    data: JSON.stringify(message),
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        alert(data);
+                    },
+                    error: function (data) {
+                        alert(data.responseText);
+                    }
+                });
+            }
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////диалоги
+            //добавление участника в публичную беседу
+            function Chat() {
+
+                $.ajax({
+                    url: '/api/chat/getpeople',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        ChatResponse(data);
+                    },
+                    error: function (x, y, z) {
+                        alert(x + '\n' + y + '\n' + z);
+                    }
+                });
+            }
+            // вывод полученных пользователей для добавления в беседу
+            function ChatResponse(users) {
+                var strResult = "<table><h4 class='arial'>Пользователи:</h4>";
+                $.each(users, function (index, user) {
+                    strResult += "<tr><td class='under'>" + user.Email + "</td><td>" +
+                        "</td><td><input type='checkbox' id='checkbox' value='" + user.Id + "'</td>";
+                });
+
+                strResult += "</table>";
+                strResult += " <p><b>Название беседы:</b></p>" +
+                    "<p><input type='text' id='ChatName' /></p >";
+                strResult += "<input type='button' onclick='ChatItem()' value='Добавить'/>";
+                $("#selectUserBlock").html(strResult);
+            }
+            // обработчик события// передача массивов id пользователей в контроллер
+            function ChatItem() {
+                var arr = [];
+                arr = $("input:checkbox:checked").map(function () { return this.value; }).get();
+                var chatname = $("#ChatName").val();
+                var value = {
+                    MassivIdUser: arr,
+                    Name: chatname
+                };
+                $.ajax({
+                    url: '/api/group/array',
+                    type: 'POST',
+                    data: JSON.stringify(value),
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        alert(data);
+                    },
+                    error: function (data) {
+                        alert(data.responseText);
+                    }
+                });
+
+            }
+
+            /////////////список бесед пользователя/////////////////////////////////////////////////////////////////////////////////////////////
+            //получение названий бесед,в которых состоит пользователь
+            function ChatName() {
+                $.ajax({
+                    url: '/api/group/getchats',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+
+                        ChatInfoResponse(data);
+                    },
+                    error: function (data) {
+                        alert(data.responseText);
+                    }
+                });
+            }
+            /// вывод информации о беседе
+            function ChatInfoResponse(chats) {
+                var strResult = "<table><h4  class='arial'>Беседы:</h4>";
+                $.each(chats, function (index, chat) {
+                    strResult +=
+                        "<tr><td class='under'><a id='chatId' data-chat='" + chat.Id + "'onclick='GroupItem(this);'>" + chat.Name + "</a ></td > "
+                        + "<td>&nbsp;&nbsp;&nbsp;&nbsp</td>" + 
+                        "<td><a href='#' class='glo' id='editItem' data-out='" + chat.Id + "' onclick='OutItem(this);'> Покинуть чат </a></td>";
+                });
+                strResult += "</table>";
+                $("#chatUserBlock").html(strResult);
+            }
+            //обработчик выбора беседы для получения сообщений
+            function GroupItem(el) {
+                var id = $(el).attr('data-chat');
+                FindChat(id);
+            }
+            //обработчик выхода из беседы
+            function OutItem(el) {
+                var id = $(el).attr('data-out');
+                OutChat(id);
+            }
+            //выход из беседы
+            function OutChat(id) {
+                $.ajax({
+                    url: '/api/group/outchat/' + id,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        alert(data);
+                    },
+                    error: function (data) {
+                        alert(data.responseText);
+                    }
+                });
+            }
+            // поиск беседы по id
+            function FindChat(id) {
+
+                $.ajax({
+                    url: '/api/group/findchat/' + id,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        HistoryChatMessage(id);
+                        ShowChat(data);
+                    },
+                    error: function (data) {
+                        alert(data.responseText);
+                    }
+                });
+            }
+            ////вывод названия беседы
+            function ShowChat(chat) {
+                if (chat != null) {
+                    $("#writeChatBlock").css('display', 'block');
+                    $("#MessageFrom").val(chat.Name);
+                    $("#chatId").val(chat.Id);
+                }
+                else {
+                    alert(",Беседа не найдена");
+                }
+            }
+            //история сообщений беседы
+            function HistoryChatMessage(id) {
+
+                $.ajax({
+                    url: '/api/group/getmessages/' + id,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        ChatMessageResponse(data);
+                    },
+                    error: function (data) {
+                        alert(data.responseText);
+                    }
+                });
+            }
+            //вывод полученных истории сообщений беседы на экран
+            function ChatMessageResponse(messages) {
+
+                var strResult = "<table><h4>История сообщений:</h4>";
+                var chatName="";
+                $.each(messages, function (index, message) {
+                    chatName = message.Chat.Name;
+                });
+                strResult += "<caption><b class='under'>Беседа:&nbsp;" + chatName+"</b></caption>";
+                $.each(messages, function (index, message) {
+                    if (message.ImageRout === null) {
+                        
+                        strResult += "<tr><td>Отправитель:</td><td class='under'>" + message.FromName + "</td><td>" + "<tr><td>" + message.Text + "</td><td>" + "<tr><td>" + message.DateTime + "</td><td>";
+                    }
+                    else {
+                        
+                        strResult += "<tr><td>Отправитель:</td><td class='under'>" + message.FromName + "</td><td>" + "<tr><td>" + message.Text + "</td><td>" + "<tr><td>" + "<img width='75' height='75' src='../Files/" + message.ImageRout + "'/>" + "</td><td>" + "<tr><td>" + message.DateTime + "</td><td>";
+                    }
+
+                });
+                strResult += "</table>";
+                $("#dialogBlock").prepend(strResult);
+
+
+            }
+          
+            ////////////////////////////////////бан пользователей/////////////////////////////////////////////
+            function BanList() { //список пользователей для бана
+
+                $.ajax({
+                    url: '/api/admin/getpeople',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        BanResponse(data);
+                    },
+                    error: function (x, y, z) {
+                        alert(x + '\n' + y + '\n' + z);
+                    }
+                });
+            }
+            // вывод полученных пользователей для добавления в банлист
+            function BanResponse(users) {
+                var strResult = "<table class='arial'><h4>Блокировка пользователей:</h4>";
+                $.each(users, function (index, user) {
+                    strResult += "<tr><td class='under'>" + user.Email + "</td><td>" +
+                        "</td><td><input type='checkbox' id='checkbox' value='" + user.Id + "'</td>";
+                });
+
+                strResult += "</table>";
+                strResult += "<a href='#' class='green' onclick='BanItem()'>Заблокировать</a>";
+                $("#banUserBlock").html(strResult);
+            }
+            //// обработчик события// передача массивов id пользователей в контроллер
+            function BanItem() {
+                var arr = [];
+                arr = $("input:checkbox:checked").map(function () { return this.value; }).get();
+                var value = {
+                    BanIdMassive: arr
+                };
+                $.ajax({
+                    url: '/api/admin/array',
+                    type: 'POST',
+                    data: JSON.stringify(value),
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        alert(data);
+                    },
+                    error: function (data) {
+                        alert(data.responseText);
+                    }
+                });
+
+
+            }
+            ///////////////////////////////////////////////////////////////////////////////////////////////Прикрепление файла///////////////////////////////
+            ///открытие формы добавления файла
+            function FileAdd() {
+                alert("файл");
+                $("#files").css('display', 'block');
+            }
+            //добавление файла
+            function Broadcast() {
+                var files = document.getElementById('uploadFile').files;
+                var data = new FormData();
+                for (var x = 0; x < files.length; x++) {
+                    data.append("file" + x, files[x]);
+                }
+
+                $.ajax({
+                    url: '/api/chat/file',
+                    type: 'POST',
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (data) {
+                        alert(data);
+                    },
+                    error: function (x, y, z) {
+                        alert(x + '\n' + y + '\n' + z);
+                    }
+                });
+            }
+
+
+        </script>
+    }
